@@ -1,0 +1,23 @@
+user
+/login -> (post)
+/register -> (post)
+/forget-pass -> (post)
+/verification/:id -> (post)
+/report/:id -> (get)
+
+events
+/events -> (get)
+/events/add -> (post)
+/events/edit/:id -> (post)
+/events/delete/id -> (delete)
+
+
+profile
+/profile/:id -> (get)
+/profile/:id/edit -> (post)
+
+sap points
+/sap/add -> (post)
+/sap/all -> (get)
+/sap/:id/edit -> (post)
+/sap/:id/delete -> (delete)
