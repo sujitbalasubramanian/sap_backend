@@ -10,6 +10,7 @@ const eventRoutes = require('./routes/event_routes')
 const profileRoutes = require('./routes/profile_routes')
 const sapRoutes = require('./routes/sap_routes')
 const userRoutes = require('./routes/user_routes')
+const staffRoutes = require('./routes/staff_routes')
 
 
 //initilizing
@@ -31,8 +32,9 @@ mongoose.connect(process.env.DB).then(() => {
 
 //express app
 app.use('/user', userRoutes)
+app.use('/staff', staffRoutes)
 app.use('/sap', sapRoutes)
-app.use('/profile', eventRoutes)
+app.use('/profile', profileRoutes)
 app.use('/event', eventRoutes)
 
 app.get('/', (req, res) => {

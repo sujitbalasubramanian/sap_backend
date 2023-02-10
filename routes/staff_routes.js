@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const {login, signup, getalluser} = require('../controllers/user_controller')
 
-router.get('/', getalluser);
-router.post('/login', login);
+const {login, signup, getallstaff} = require('../controllers/staff_controller')
+
+router.get('/', getallstaff);
+router.get('/login', login);
 router.post('/register', signup);
 
 // router.post('/forget-password',);

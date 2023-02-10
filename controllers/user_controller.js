@@ -2,8 +2,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../model/user')
 
 module.exports.signup = async (req, res) => {
-    console.log(req.body)
-    const {first_name, last_name, kongu_email, password, rollno, classname, department} = {...req.body}
+    const {first_name, last_name, kongu_email, password, rollno, classname, department, year} = {...req.body}
 
     try {
         const existinguser = await User.findOne({kongu_email})
@@ -11,7 +10,7 @@ module.exports.signup = async (req, res) => {
             return res.status(400).json('User already found..')
         }
         const hashPassword = await bcrypt.hash(password, 12);
-        const newUser = new User({first_name, last_name, kongu_email, password: hashPassword, rollno, classname, department})
+        const newUser = new User({first_name, last_name, kongu_email, password: hashPassword, rollno, year, classname, department})
         await newUser.save();
     } catch (err) {
         console.log(err.message)
@@ -24,11 +23,8 @@ module.exports.login = async (req, res) => {
     try {
         var existinguser = await User.findOne({kongu_email})
         if (!existinguser) {
-            existinguser = await Admin.findOne({kongu_email})
-            if (!existinguser) {
-                console.log("User not found...");
-                return res.status(404).json("User not found...")
-            }
+            console.log("User not found...");
+            return res.status(404).json("User not found...")
         }
         const isPasswordCrt = await bcrypt.compare(password, existinguser.password)
         if (!isPasswordCrt) {
@@ -58,6 +54,15 @@ module.exports.editProfile = async (req, res) => {
         const user = await User.findByIdAndUpdate(id, {...req.body});
         await user.save();
         res.status(200).json("Successfully Edited")
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports.getalluser = async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.status(200).json(users)
     } catch (error) {
         res.status(500).json(error)
     }

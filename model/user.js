@@ -20,6 +20,9 @@ const userSchema = new Schema({
     rollno: {
         type: String,
     },
+    year: {
+        type: String,
+    },
     classname: {
         type: String,
     },
