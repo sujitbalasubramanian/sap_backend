@@ -14,11 +14,10 @@ const eventsSchema = new Schema({
         type: String
     },
     poster: {
-        data: Buffer,
-        contentType: String
+        type: String
     },
     end_date: {
-        type: Date,
+        type: String,
         required: true
     },
     venue: {
@@ -38,19 +37,6 @@ const eventsSchema = new Schema({
     paid: {
         type: Boolean,
         default: true,
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    sub_category: {
-        type: String,
-        required: true
-    },
-    io: {
-        type: String,
-        enum: ["inside", "outside"],
-        default: 'inside'
     },
 })
 

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const multer = require("multer");
 
 //routes
 const eventRoutes = require('./routes/event_routes')
@@ -15,13 +16,14 @@ const staffRoutes = require('./routes/staff_routes')
 
 //initilizing
 const app = express();
-app.use(express.static(path.join(__dirname, "/public")));
+app.use('/public', express.static(path.join(__dirname, "/uploads")));
 dotenv.config();
 app.use(express.json({extended: true}));
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs")
 
 //db connection
 mongoose.connect(process.env.DB).then(() => {

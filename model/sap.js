@@ -6,35 +6,30 @@ const sapSchema = new Schema({
         type: String,
         required: true
     },
-    proff: {
-        data: Buffer,
-        contentType: String
-    },
-    category: {
-        type: String,
-    },
-    io: {
-        type: String,
-    },
-    rollno: {
+    proof: {
         type: String,
     },
     category: {
         type: String,
-        required: true
     },
     sub_category: {
         type: String,
-        required: true
     },
     io: {
         type: String,
-        enum: ["inside", "outside"],
-        default: 'inside'
     },
     points: {
         type: Number,
         default: 0
+    },
+    rollno: {
+        type: String
+    },
+    year: {
+        type: String
+    },
+    classname: {
+        type: String
     },
     verification_status: {
         type: String,

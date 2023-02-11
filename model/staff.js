@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const staffuserSchema = new Schema({
-    first_name: {
+    staff_name: {
         type: String,
         required: true
     },
-    last_name: {
+    kongu_email: {
         type: String,
     },
     password: {
@@ -15,14 +15,13 @@ const staffuserSchema = new Schema({
     department: {
         type: String,
     },
-    staffid: {
-        type: String,
-    },
-    designation: {
-        type: String,
-    },
     advisor: {
         type: String,
+        default: "Nil"
+    },
+    year: {
+        type: String,
+        default: "Nil"
     },
     user_verified: {
         type: Boolean,

@@ -3,16 +3,18 @@ const Staff = require('../model/staff')
 
 module.exports.signup = async (req, res) => {
     console.log(req.body)
-    const {first_name, last_name, kongu_email, password, rollno, classname, department} = {...req.body}
+    const {staff_name, kongu_email, password, department, is_hod} = {...req.body}
 
     try {
-        const existingstaff = await User.findOne({kongu_email})
+        const existingstaff = await Staff.findOne({kongu_email})
         if (existingstaff) {
             return res.status(400).json('staff already found..')
         }
         const hashPassword = await bcrypt.hash(password, 12);
-        const newstaff = new User({first_name, last_name, kongu_email, password: hashPassword, rollno, classname, department})
+        const newstaff = new Staff({staff_name, kongu_email, password: hashPassword, department, is_hod})
+        console.log("fetch")
         await newstaff.save();
+        res.status(200).json(newstaff)
     } catch (err) {
         console.log(err.message)
         res.status(500).json('Something went worng...')
@@ -64,6 +66,17 @@ module.exports.editProfile = async (req, res) => {
 module.exports.getallstaff = async (req, res) => {
     try {
         const staffs = await Staff.find({});
+        res.status(200).json(staffs)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+module.exports.getstaff = async (req, res) => {
+    try {
+        const {dept} = req.params
+        const is_hod = false
+        const staffs = await Staff.find({department: dept, is_hod});
         res.status(200).json(staffs)
     } catch (error) {
         res.status(500).json(error)
